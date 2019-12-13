@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+         <!-- heart是组件的一个属性，那么组件必须通过props声明这个属性 -->
+        <!-- <zz v-bind:heart="article"></zz> 
+        <guolele v-bind:heart="article2"></zz> -->
+        <zz-v2 v-for="article in articleList" :key="article.title" :heart="article">
+            <h5>评论：你为什么喜欢穿丝袜？</h5>
+        </zz-v2>
+    </div>
+    <script>
+        //定义guolele这个自定义组件
+        //第一个参数是自定义组件的标签名称，第二参数是定义该组件的运行规则对象
+        Vue.component('zz-v2',{
+            props:['heart'],
+
+            // template中定义的是组件的模板，也就是html和{{}}以及vue指令的组合
+            // template必须要有根标签 例如 <h1></h1><h2></h2>不合法， <div><h1></h1><h2></h2></div>合法的
+            template:'<div>'+
+                        '<h1 style="color:red">{{heart.title}}</h1>'+
+                        '<h2>作者：{{heart.author}}</h2>'+
+                        '<h3>时间：{{heart.publishDate}}</h3>'+
+                        '<p>{{heart.content}}</p>'+
+                    '</div>'
+        });
+
+        var app = new Vue({
+            el:"#app",
+            data:{
+               articleList:[{
+                   title:"hwh真帅",
+                   author:"zz",
+                   publishDate:"2019-12-10",
+                   content:"他喜欢穿丝袜是个带艺术家",
+               },
+               {
+                   title:"hwh真暖",
+                   author:"zz",
+                   publishDate:"2019-12-10",
+                   content:"他喜欢喊别人小学妹",
+               },
+               {
+                   title:"hwh真man",
+                   author:"zz",
+                   publishDate:"2019-12-10",
+                   content:"他喜欢小家碧玉",
+               },
+               {
+                   title:"hwh真溜",
+                   author:"zz",
+                   publishDate:"2019-12-10",
+                   content:"他喜欢打篮球，却总是受伤",
+               }
+               ]
+            },
+        })
+    </script>
+    <style>
+    
+    </style>
+</body>
+</html>
